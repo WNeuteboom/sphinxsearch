@@ -309,9 +309,13 @@ class SphinxSearch
         $this->total_found  = 0;
         $this->time         = 0;
 
-        $result = (array)$this->query($this->term, $this->index);
+        $result = $this->query($this->term, $this->index);
 
-        return $this->processResult($result);
+        if (is_array($result)) {
+            return $this->processResult($result);
+        }
+
+        return false;
     }
 
     public function total_found()
