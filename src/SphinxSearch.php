@@ -33,6 +33,18 @@ class SphinxSearch
         return $this;
     }
 
+    public function resetFilter($name)
+    {
+        $this->connection->filters = array_filter(
+            $this->connection->filters,
+            function ($filter) use ($name) {
+                return $name !== $filter['attr'];
+            }
+        );
+
+        return $this;
+    }
+
     public function select()
     {
         $this->SetSelect(implode(",", func_get_args()));
